@@ -16,15 +16,15 @@ const loadMainPage = async (req, res) => {
     console.log(req.sessionId)
     console.log("requested to load main page");
     let heroSliders = await Heroslider.find();
-    let workshop = await Workshop.findOne().sort({ time: -1 });
-    let currTime = new Date();
+    // let workshop = await Workshop.findOne().sort({ time: -1 });
+    // let currTime = new Date();
     let isWorkshop = false;
-    if (workshop != {} && workshop.time > currTime) isWorkshop = true;
+    // if (workshop != {} && workshop.time > currTime) isWorkshop = true;
     let specialSection = await Specialslider.find();
     let testimonials = await Testimonial.find().populate({ path: "user", select: 'fullname profilepicture' });
     let events = await Event.find();
-    const menus = await Menu.find({available:true}).populate("dishes");
-    let allSection = { heroSliders, menus, workshop, specialSection, testimonials, events, user: req.user, isWorkshop: isWorkshop };
+    const menus = await Menu.find({ available: true }).populate("dishes");
+    let allSection = { heroSliders, menus, specialSection, testimonials, events, user: req.user, isWorkshop: isWorkshop };
     // console.log(req.user);
     res.status(200).json(allSection);
 }
@@ -125,7 +125,7 @@ const updateUser = async (req, res) => {
 
             imagekit.upload({
                 file: data,
-                fileName: myFile, 
+                fileName: myFile,
                 folder: "/Koe_Cafe/profilephoto"
             },
                 async function (error, result) {

@@ -1,12 +1,14 @@
 import koeLogo from "../../assets/images/koe-logo.png";
 // import "../../sass/components/_footer.scss";
 import { Link } from "react-router-dom";
-import { actionPerformed, linkVisited, pageVisited } from "../../helperfunction";
+import {
+  actionPerformed,
+  linkVisited,
+  pageVisited,
+} from "../../helperfunction";
 import Map from "../Map/Map";
 
-
 export default function Footer() {
-
   return (
     <footer className="footer section has-bg-image text-center">
       <div className="container">
@@ -23,7 +25,13 @@ export default function Footer() {
               />
             </Link>
 
-            <a href="#map" className="body-4 contact-link" onClick={(event) => {linkVisited(event,"Google Map")}}>
+            <a
+              href="#map"
+              className="body-4 contact-link"
+              onClick={(event) => {
+                linkVisited(event, "Google Map");
+              }}
+            >
               <address>
                 205, International Finance Centre,
                 <br /> VIP Road, opp. Fire Station,
@@ -40,7 +48,11 @@ export default function Footer() {
               koethekafe@gmail.com
             </a>
 
-            <a href="tel:+91-96246 96846" className="body-4 contact-link" onClick={(event) => linkVisited(event, "Contact")}>
+            <a
+              href="tel:+91-96246 96846"
+              className="body-4 contact-link"
+              onClick={(event) => linkVisited(event, "Contact")}
+            >
               Booking Request : +91 96246 96846
             </a>
 
@@ -72,19 +84,31 @@ export default function Footer() {
             </li>
 
             <li>
-              <a href="#workshop" className="label-2 footer-link hover-underline" onClick={() => actionPerformed("sectionVisited", "Workshop")}>
+              <a
+                href="#workshop"
+                className="label-2 footer-link hover-underline"
+                onClick={() => actionPerformed("sectionVisited", "Workshop")}
+              >
                 Workshop
               </a>
             </li>
 
             <li>
-              <a href="#about" className="label-2 footer-link hover-underline" onClick={() => actionPerformed("sectionVisited", "about")}>
+              <a
+                href="#about"
+                className="label-2 footer-link hover-underline"
+                onClick={() => actionPerformed("sectionVisited", "about")}
+              >
                 About Us
               </a>
             </li>
 
             <li>
-              <a href="#reservation" className="label-2 footer-link hover-underline" onClick={() => actionPerformed("sectionVisited", "Reservation")}>
+              <a
+                href="#reservation"
+                className="label-2 footer-link hover-underline"
+                onClick={() => actionPerformed("sectionVisited", "Reservation")}
+              >
                 Book Table!
               </a>
             </li>
@@ -102,7 +126,9 @@ export default function Footer() {
 
           <ul className="footer-list">
             <li>
-              <a href="#footer" className="label-2 footer-link hover-underline"
+              <a
+                href="https://www.facebook.com/"
+                className="label-2 footer-link hover-underline"
                 onClick={linkVisited}
               >
                 Facebook
@@ -121,20 +147,28 @@ export default function Footer() {
             </li>
 
             <li>
-              <a href="#footer" className="label-2 footer-link hover-underline" onClick={linkVisited}>
+              <a
+                href="https://x.com/"
+                className="label-2 footer-link hover-underline"
+                onClick={linkVisited}
+              >
                 Twitter
               </a>
             </li>
 
             <li>
-              <a href="#footer" className="label-2 footer-link hover-underline" onClick={linkVisited}>
+              <a
+                href="https://www.youtube.com/"
+                className="label-2 footer-link hover-underline"
+                onClick={linkVisited}
+              >
                 Youtube
               </a>
             </li>
 
             <li>
               <a
-                href="#map"
+                href="https://www.google.com/maps"
                 className="label-2 footer-link hover-underline"
                 onClick={linkVisited}
               >

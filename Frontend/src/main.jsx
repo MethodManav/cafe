@@ -48,7 +48,6 @@ import OrderDetailedAnalytics from "./components/adminfeatures/Analytics/orders/
 import TrafficDetailedAnalytics from "./components/adminfeatures/Analytics/traffic/TrafficDetailedAnalytics.jsx";
 import NotFound from "./components/notfound/NotFound.jsx";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,7 +57,7 @@ const router = createBrowserRouter([
       </CartProvider>
     ),
     loader: App.loader,
-    errorElement: <NotFound />
+    errorElement: <NotFound />,
   },
   {
     path: "/auth/login",
@@ -105,10 +104,10 @@ const router = createBrowserRouter([
             index: true,
             element: <UserBooking />,
           },
-          {
-            path: "workshop",
-            element: <WorkshopRegisterd />,
-          },
+          // {
+          //   path: "workshop",
+          //   element: <WorkshopRegisterd />,
+          // },
           {
             path: "testimonial",
             element: <UserTestimonial />,
@@ -121,8 +120,8 @@ const router = createBrowserRouter([
       },
       {
         path: "order",
-        element: <Order />
-      }
+        element: <Order />,
+      },
     ],
   },
   {
@@ -135,34 +134,34 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <DashBoardAnalytics />
+            element: <DashBoardAnalytics />,
           },
           {
-            path: 'user',
-            element: <UserDetailedAnalytics />
+            path: "user",
+            element: <UserDetailedAnalytics />,
           },
           {
-            path: 'revenue',
-            element: <RevenueDetailedAnalytics />
+            path: "revenue",
+            element: <RevenueDetailedAnalytics />,
           },
           {
-            path: 'orders',
-            element: <OrderDetailedAnalytics />
+            path: "orders",
+            element: <OrderDetailedAnalytics />,
           },
           {
             path: "review",
-            element: <DishAnalytics />
+            element: <DishAnalytics />,
           },
           {
             path: "traffic",
-            element: <TrafficDetailedAnalytics />
-          }
-        ]
+            element: <TrafficDetailedAnalytics />,
+          },
+        ],
       },
       {
         index: true,
         path: "user",
-        element: <ManageUser />
+        element: <ManageUser />,
       },
       {
         element: <CustomizeHomePage />,
@@ -170,94 +169,91 @@ const router = createBrowserRouter([
       },
       {
         path: "customize/Hero",
-        element: <CustomizeHeroSection />
+        element: <CustomizeHeroSection />,
       },
       {
         path: "customize/speciality",
-        element: <CustomizeSpecialitySection />
+        element: <CustomizeSpecialitySection />,
       },
       {
         path: "customize/event",
-        element: <CustomizeEventSection />
+        element: <CustomizeEventSection />,
       },
       {
         path: "customize/workshop",
-        element: <CustomizeWorkshopSection />
+        element: <CustomizeWorkshopSection />,
       },
       {
         path: "customize/testimonial",
-        element: <CustomizeTestimonialSection />
-      }
-      , {
-        path: "workshop",
-        element: <ManageWorkshop />,
-        children: [
-          {
-            path: "registrations",
-            element: <WorkshopRegistrations />
-          }
-        ]
+        element: <CustomizeTestimonialSection />,
       },
+      // {
+      //   path: "workshop",
+      //   element: <ManageWorkshop />,
+      //   children: [
+      //     {
+      //       path: "registrations",
+      //       element: <WorkshopRegistrations />,
+      //     },
+      //   ],
+      // },
       {
         path: "notification",
         element: <CreateNotifications />,
         children: [
           {
             path: "website",
-            element: <WebsiteNotification />
+            element: <WebsiteNotification />,
           },
           {
             path: "email",
-            element: <MailNotification />
+            element: <MailNotification />,
           },
           {
             path: "pushnotification",
-            element: <PushNotification />
-          }
-        ]
+            element: <PushNotification />,
+          },
+        ],
       },
       {
         path: "booking",
-        element: <ManageBooking />
+        element: <ManageBooking />,
       },
       {
         path: "menu",
         element: <MenuSection />,
-        children:
-          [
-            {
-              element: <CreateMenu />,
-              index: true
-            },
-            {
-              path: "show",
-              element: <MenuDetails />
-            },
-            {
-              path: "dishes/:menuId",
-              element: <Dish />
-            }
-          ]
-
+        children: [
+          {
+            element: <CreateMenu />,
+            index: true,
+          },
+          {
+            path: "show",
+            element: <MenuDetails />,
+          },
+          {
+            path: "dishes/:menuId",
+            element: <Dish />,
+          },
+        ],
       },
       {
         path: "order",
-        element: <ManageOrder />
-      }
-    ]
+        element: <ManageOrder />,
+      },
+    ],
   },
 
   {
     path: "menu",
-    element: <>
-      <CartProvider>
-        <Menu />
-      </CartProvider>
-    </>
-  }
-
-
-
+    element: (
+      <>
+        <CartProvider>
+          <Menu />
+        </CartProvider>
+      </>
+    ),
+  },
 ]);
 
 ReactDOM.createRoot(document.querySelector("#root")).render(
@@ -265,7 +261,12 @@ ReactDOM.createRoot(document.querySelector("#root")).render(
   <AuthProvider>
     <>
       <ToastContainer
-        style={{ width: "100%", padding: "2rem", maxWidth: "65rem", textAlign: "center" }}
+        style={{
+          width: "100%",
+          padding: "2rem",
+          maxWidth: "65rem",
+          textAlign: "center",
+        }}
         limit={3}
         closeOnClick
         draggable
@@ -275,6 +276,6 @@ ReactDOM.createRoot(document.querySelector("#root")).render(
       />
       <RouterProvider router={router} />
     </>
-  </AuthProvider>
+  </AuthProvider>,
   // </React.StrictMode>
 );

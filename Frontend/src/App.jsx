@@ -27,35 +27,33 @@ function App() {
     testimonials: [],
   });
 
-
   const [user, setUser] = useState(false);
-  
+
   let homePageData = useLoaderData(App.loader);
 
   useEffect(() => {
     setHomePage(homePageData);
     if (homePageData.user) setUser(true);
 
-    pageVisited("HomePage")
+    pageVisited("HomePage");
   }, []);
 
   const handleLogout = useCallback(() => {
     setHomePage((prev) => ({ ...prev, user: null }));
     setUser(false);
-  }, [])
-
+  }, []);
 
   return (
     <>
       <Header user={homePage.user} onLogout={handleLogout} />
-      <Cart />  
+      <Cart />
       <HeroSection heroSliders={homePage.heroSliders} />
       <MenuSection menus={homePage.menus} />
-      <Workshop
+      {/* <Workshop
         workshop={homePage.workshop}
         isWorkshop={homePage.isWorkshop}
         isUser={user}
-      />
+      /> */}
       <About />
       <Specialities specialSliders={homePage.specialSection} />
       <Reservation isUser={user} userId={user && homePage.user._id} />
@@ -64,7 +62,8 @@ function App() {
       <Testimonial
         testimonials={homePage.testimonials}
         isUser={user}
-        isTestimonial={user && homePage.user.testimonial ? true : false} />
+        isTestimonial={user && homePage.user.testimonial ? true : false}
+      />
       <Footer />
       <BackToTop />
     </>
@@ -86,7 +85,7 @@ App.loader = async function getHomePage() {
     if (fetchHomePage.ok) {
       return homePageData;
     } else {
-      toastMessage(homePageData)
+      toastMessage(homePageData);
       return 0;
     }
   } catch (error) {
