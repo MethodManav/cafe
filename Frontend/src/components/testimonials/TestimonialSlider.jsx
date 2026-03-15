@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { pageVisited } from "../../helperfunction";
 import { IKImage } from "imagekitio-react";
 
-
 function TestimonialSlider({ testimonial, isUser, isActive, isTestimonial }) {
   return (
     <li
@@ -21,20 +20,20 @@ function TestimonialSlider({ testimonial, isUser, isActive, isTestimonial }) {
         />
       </div>
 
-      <p className="label-2 section-subtitle">
-        {testimonial.user.fullname}
-      </p>
+      <p className="label-2 section-subtitle">{testimonial?.user?.fullname}</p>
 
       <IKImage
-        urlEndpoint='https://ik.imagekit.io/vaibhav11'
-        src={testimonial.user.profilepicture.imagelink}
+        urlEndpoint="https://ik.imagekit.io/vaibhav11"
+        src={testimonial?.user?.profilepicture?.imagelink}
         className="profile-img"
         alt="testimonial-user-profile-image"
-        transformation={[{
-          quality: 100,
-          height: 120,
-          width: 120
-        }]}
+        transformation={[
+          {
+            quality: 100,
+            height: 120,
+            width: 120,
+          },
+        ]}
         loading="lazy"
       />
 
@@ -43,7 +42,11 @@ function TestimonialSlider({ testimonial, isUser, isActive, isTestimonial }) {
         isTestimonial ? (
           <></>
         ) : (
-          <Link to="/testimonial" className="btn btn-secondary" onClick={() => pageVisited("Add Testimonial")}>
+          <Link
+            to="/testimonial"
+            className="btn btn-secondary"
+            onClick={() => pageVisited("Add Testimonial")}
+          >
             <span className="text text-1">Add Testimonial!</span>
 
             <span className="text text-2" aria-hidden="true">

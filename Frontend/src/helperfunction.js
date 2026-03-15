@@ -14,9 +14,9 @@ function toastMessage(responseData) {
     }
 }
 
-function validatePhoneNumber(number){
+function validatePhoneNumber(number) {
     number = parseInt(number);
-    if(number.length != 10) return false;
+    if (number.length != 10) return false;
     return true;
 }
 
@@ -64,12 +64,14 @@ const getData = async (route) => {
             }
         })
         let responseData = await fetchUrl.json();
-        toastMessage(responseData);
+        if (responseData.success === true) {
+            toastMessage(responseData);
+        }
         return responseData;
     }
     catch (error) {
         console.log(error);
-        toastMessage(error);
+        // toastMessage(error);
         return false;
     }
 }
@@ -155,4 +157,4 @@ const actionPerformed = async (key, description) => {
 }
 
 
-export { toastMessage, getTime, getTime12hrs, wrapAsync, getData, patchData, uploadFormData, monitorActivity, linkVisited, pageVisited, actionPerformed ,validatePhoneNumber};
+export { toastMessage, getTime, getTime12hrs, wrapAsync, getData, patchData, uploadFormData, monitorActivity, linkVisited, pageVisited, actionPerformed, validatePhoneNumber };

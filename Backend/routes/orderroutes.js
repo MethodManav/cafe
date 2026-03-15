@@ -32,7 +32,7 @@ router.post("/payment/success", wrapAsync(async (req, res) => {
 
     let totalAmount = orderDetails.reduce((acc, order) => { return acc + (order.dish.price * order.quantity) }, 0);
     const userId = req.user;
-    const newOrder = new Order({ orders: orderDetails, totalAmount: totalAmount, user: userId,paymentId: razorpayPaymentId});
+    const newOrder = new Order({ orders: orderDetails, totalAmount: totalAmount, user: userId, paymentId: razorpayPaymentId });
     const order = await newOrder.save();
     await User.findByIdAndUpdate(userId, { $push: { 'orders': order._id }, cart: [] });
     let io = req.app.get('socket.io');
@@ -55,9 +55,27 @@ router.route("/")
             path: 'orders',
             options: { sort: { createdAt: -1 } }
         });
-        
-        res.status(200).json(orderDetails.orders);
-    }))
+        const filteredOrders = orderDetails.orders.filter(order => order.status !== "Cancelled");
+
+        res.status(200).json(filteredOrders);
+    }));
+
+router.patch("/cancel-order", wrapAsync(async (req, res) => {
+    const { orderId } = req.body;
+    const userId = req.user._id;
+    const order = await Order.findOne({ _id: orderId, user: userId });
+    if (!order) {
+        return res.status(404).json({ success: false, message: "Order not found." });
+    }
+    if (order.status === "Cancelled") {
+        return res.status(400).json({ success: false, message: "Order is already cancelled." });
+    }
+    await Order.findOneAndUpdate(
+        { _id: orderId },
+        { status: "Cancelled", "orders.$[].status": "Cancelled" }
+    );
+    res.status(200).json({ success: true, message: "Order cancelled successfully." });
+}))
 
 
 router.patch("/rating/:id", wrapAsync(async (req, res) => {

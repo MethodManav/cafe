@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 8080;
 
 
 //utils and config
-const {ExpressError} = require("./utils/wrapAsyncAndExpressError.js")
+const { ExpressError } = require("./utils/wrapAsyncAndExpressError.js")
 const connectDB = require('./config/dbconfig.js');
 
 
@@ -59,7 +59,7 @@ const cors = require('cors')
 
 const corsOptions = {
   origin: process.env.FRONTEND_DOMAIN,
-  methods: ["GET","PATCH","PUT","DELETE","POST"],
+  methods: ["GET", "PATCH", "PUT", "DELETE", "POST"],
   optionsSuccessStatus: 200,
   credentials: true
 }
@@ -90,7 +90,7 @@ const session_options = {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'None'
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax'
   }
 };
 
@@ -185,7 +185,7 @@ app.use("/order", isLogedIn, orderRouter);
 
 app.use("/admin", isAdmin, adminRouter);
 
-app.use("/pushnotification",isLogedIn,pushNotificationRoter);
+app.use("/pushnotification", isLogedIn, pushNotificationRoter);
 
 app.use("/admin/herosection", isAdmin, herosectionRouter);
 
